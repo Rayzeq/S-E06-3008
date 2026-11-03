@@ -8,3 +8,6 @@ select = [
     "SIM",
     "I",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = [ "src" ]
