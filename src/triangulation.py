@@ -1,3 +1,5 @@
+"""Triangulation of a set of 2D points using the Bowyer-Watson algorithm."""
+
 from models import Point, Triangle
 
 
@@ -6,6 +8,7 @@ class TriangulationError(Exception):
 
 
 def in_circumcircle(p: Point, a: Point, b: Point, c: Point) -> bool:
+    """Return whether point p lies inside the circumcircle of triangle abc."""
     ax, ay = a.x - p.x, a.y - p.y
     bx, by = b.x - p.x, b.y - p.y
     cx, cy = c.x - p.x, c.y - p.y

@@ -1,3 +1,5 @@
+"""Integration tests for the Triangulator HTTP API."""
+
 import pytest
 import requests
 import responses
@@ -7,6 +9,7 @@ from main import POINTSET_MANAGER_BASE_URL, app
 
 @pytest.fixture
 def client():
+    """Provide a Flask test client for the Triangulator application."""
     app.config.update(
         {
             "TESTING": True,
@@ -18,6 +21,7 @@ def client():
 
 @responses.activate
 def test_api_pointset_manager_returns_400(client):
+    """Check that a PointSetManager 400 error is forwarded to the client."""
     responses.add(
         responses.GET,
         f"{POINTSET_MANAGER_BASE_URL}/pointset/123",
@@ -38,6 +42,7 @@ def test_api_pointset_manager_returns_400(client):
 
 @responses.activate
 def test_api_pointset_manager_returns_404(client):
+    """Check that a PointSetManager 404 error is forwarded to the client."""
     responses.add(
         responses.GET,
         f"{POINTSET_MANAGER_BASE_URL}/pointset/1234",
@@ -58,6 +63,7 @@ def test_api_pointset_manager_returns_404(client):
 
 @responses.activate
 def test_api_pointset_manager_invalid_payload(client):
+    """Check that an invalid PointSet payload returns a 500 error."""
     responses.add(
         responses.GET,
         f"{POINTSET_MANAGER_BASE_URL}/pointset/1234",
@@ -75,6 +81,7 @@ def test_api_pointset_manager_invalid_payload(client):
 
 @responses.activate
 def test_api_pointset_manager_triangulation_impossible(client):
+    """Check that a non-triangulable PointSet returns a 500 error."""
     responses.add(
         responses.GET,
         f"{POINTSET_MANAGER_BASE_URL}/pointset/1234",
@@ -92,6 +99,7 @@ def test_api_pointset_manager_triangulation_impossible(client):
 
 @responses.activate
 def test_api_pointset_manager_timeout(client):
+    """Check that an unreachable PointSetManager returns a 503 error."""
     responses.add(
         responses.GET,
         f"{POINTSET_MANAGER_BASE_URL}/pointset/1234",
@@ -108,6 +116,7 @@ def test_api_pointset_manager_timeout(client):
 
 @responses.activate
 def test_api_success(client):
+    """Check that a valid PointSet is triangulated and returned as binary."""
     mock_points = b"\x03\x00\x00\x00" + b"".join(
         b"\x00\x00\x00" + i.to_bytes(1) for i in range(6)
     )

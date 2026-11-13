@@ -110,4 +110,4 @@ Ces tests vérifie tout ce qui est relatif à la communication entre le client, 
 La sérialisation / désérialisation et la triangulation seront testés de manière indépendante.
 Le sérialisation et désérialisation seront testés avec des grosse quantités de points et de triangles.
 La triangulation sera testée de manière similaire avec beaucoup de points.
-Les quantitées de données avec lequelles tester seront déterminées selon les performances des implémentations initialles, mais une base de 10 000 ou 100 000 paraît initialement raisonnable.
+Les quantitées de données avec lequelles tester seront déterminées selon les performances des implémentations initiales, mais une base de 10 000 ou 100 000 paraît initialement raisonnable.
